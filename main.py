@@ -1,12 +1,32 @@
 import pandas as pd
 import PySimpleGUI as sg
-import os
+
 
 #calc Core 4, 6, 8, 10, 12, 14, 16, 18, 24, 32, 64
 #calc threads 6, 8, 10, 12, 16, 20, 24, 28, 32, 36, 64, 128
 def calc(escolhaT, tabela, maxvalue):
    simiatt = 1-(abs(tabela-escolhaT)/maxvalue)
    return simiatt
+
+def final(dataFrame):
+    sg.theme('DarkAmbar')
+    layout = [[sg.Text('Output:', size=(15, 1), font='Arial', justification='left')],
+              [sg.Table(values = dataFrame.values.tolist(), headings = list(dataFrame), size=(5, 20))],
+              [sg.Button('Back', size=(20, 1), font='Arial'), sg.Button('Cancel', size=(20, 1), font='Arial')]]
+
+    return sg.Window('Result', layout, finalize=True)
+
+def carregarFinal(dataFrame):
+    window = final(dataFrame)
+
+    while True:
+        event, values = window.read()
+        if event == sg.WIN_CLOSED or event == 'Cancel':  # if user closes window or clicks cancel
+            break
+        elif event == 'Back':
+            window.close()
+
+    window.close()
 
 def bubbleSort(finalList, coreList, threadsList, nameList, typelist):
   for passnum in range(len(finalList)-1,0,-1):
@@ -114,6 +134,7 @@ def Type():
  window.close()
 
  return values
+
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=#
 csv = pd.read_csv("Processadores/CPU.csv")
 
@@ -244,7 +265,7 @@ for i in range(len(finalList)):
       print(finalList[i], coreList[i], threadsList[i], nameList[i], typelist[i], "\n")
 
 
-
+carregarFinal(dataFrame)
 print(dataFrame)
 
 
