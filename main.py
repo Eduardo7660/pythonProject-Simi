@@ -229,18 +229,32 @@ for j in range(len(threadsList)):
 print(modelList, "\n", modelo)
 simiModelList = []
 for k in range(len(modelList)):
-   if modelo == "AMD" and modelList[k] == "AMD" or modelo == "Intel" and modelList[k] == "Intel" or modelo == "Apple" and modelList[k] == "Apple":
+   if modelo == modelList[k]:
        ajudante= calc(1, 1, 3)
        ajudante = ajudante * pesoModelo
        simiModelList.append(ajudante)
-   elif modelo == "AMD" and modelList[k] != "AMD" or modelo == "Intel" and modelList[k] != "Intel" or modelo == "Apple" and modelList[k] != "Apple":
+   elif modelo != "Apple" and modelList[k] != "Apple" and modelo != modelList[k]:
        ajudante = calc(1, 0.5, 3)
        ajudante = ajudante * pesoModelo
        simiModelList.append(ajudante)
+   elif model == "Apple" and modelList[k] != "Apple":
+       ajudante = calc(1, 0.2, 3)
+       ajudante = ajudante * pesoModelo
+       simiModelList.append(ajudante)
 
+simiTypelist = []
 
+for j in range(len(typelist)):
+    if typelist[j] != escolhaType:
+        ajudante = calc(1, 0, 2)
+        ajudante = ajudante * pesoType
+        simiModelList.append(ajudante)
+    else:
+        ajudante = calc(1, 1, 2)
+        ajudante = ajudante * pesoType
+        simiModelList.append(ajudante)
 
-pesoTotal = pesoModelo+pesoCore+pesoThread
+pesoTotal = pesoModelo+pesoCore+pesoThread+pesoType
 
 #ultima similaridade
 finalList = []
@@ -263,7 +277,6 @@ dataFrame = pd.DataFrame({"Similaridade": finalList, "Nome": nameList, "Core": c
 for i in range(len(finalList)):
   if typelist[i] == escolhaType:
       print(finalList[i], coreList[i], threadsList[i], nameList[i], typelist[i], "\n")
-
 
 carregarFinal(dataFrame)
 print(dataFrame)
