@@ -11,7 +11,7 @@ def calc(escolhaT, tabela, maxvalue):
 def final(dataFrame):
     sg.theme('DarkAmbar')
     layout = [[sg.Text('Output:', size=(15, 1), font='Arial', justification='left')],
-              [sg.Table(values = dataFrame.values.tolist(), headings = list(dataFrame), size=(5, 20))],
+              [sg.Table(values=dataFrame.values.tolist(), headings = list(dataFrame), size=(5, 20))],
               [sg.Button('Back', size=(20, 1), font='Arial'), sg.Button('Cancel', size=(20, 1), font='Arial')]]
 
     return sg.Window('Result', layout, finalize=True)
