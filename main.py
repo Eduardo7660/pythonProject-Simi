@@ -237,29 +237,15 @@ for k in range(len(modelList)):
        ajudante = calc(1, 0.5, 3)
        ajudante = ajudante * pesoModelo
        simiModelList.append(ajudante)
-   elif model == "Apple" and modelList[k] != "Apple":
-       ajudante = calc(1, 0.2, 3)
-       ajudante = ajudante * pesoModelo
-       simiModelList.append(ajudante)
 
-simiTypelist = []
 
-for j in range(len(typelist)):
-    if typelist[j] != escolhaType:
-        ajudante = calc(1, 0, 2)
-        ajudante = ajudante * pesoType
-        simiModelList.append(ajudante)
-    else:
-        ajudante = calc(1, 1, 2)
-        ajudante = ajudante * pesoType
-        simiModelList.append(ajudante)
 
-pesoTotal = pesoModelo+pesoCore+pesoThread+pesoType
+pesoTotal = pesoModelo+pesoCore+pesoThread
 
 #ultima similaridade
 finalList = []
 for o in range(len(simiThreadsList)):
-  ajudante = (simiThreadsList[o] + simiThreadsList[o] + simiModelList[o])/pesoTotal
+  ajudante = (simiThreadsList[o] + simiCoreList[o] + simiModelList[o])/pesoTotal
   finalList.append(ajudante)
 
 print(finalList)
